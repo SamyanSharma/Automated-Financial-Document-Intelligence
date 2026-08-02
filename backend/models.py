@@ -2,7 +2,6 @@ from sqlalchemy import Column, Integer, String,DateTime
 from database import Base
 from datetime import datetime
 
-
 class Company(Base):
 
     __tablename__ = "companies"
@@ -26,9 +25,9 @@ class Company(Base):
     sector = Column(
         String
     )
-class Filling(Base):
+class Filing(Base):
 
-    __tablename__ = "fillings"
+    __tablename__ = "filings"
 
     id = Column(
     Integer,

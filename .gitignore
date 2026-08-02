@@ -8,6 +8,7 @@ __pycache__/
 
 # Environment variables
 .env
+backend/.env
 
 # Node modules
 node_modules/
@@ -25,3 +26,13 @@ data/raw/
 # OS files
 .DS_Store
 Thumbs.db
+
+# user uploaded files
+backend/uploads/
+
+# Database files (if local)
+*.db
+*.sqlite3
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
