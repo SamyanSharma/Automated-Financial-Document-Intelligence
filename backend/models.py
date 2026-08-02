@@ -46,7 +46,9 @@ class Filing(Base):
     file_path = Column(
         String
     )
-
+    extracted_text = Column(
+        String
+    )
     uploaded_at = Column(
         DateTime,
         default=datetime.utcnow
