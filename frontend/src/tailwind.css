@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  ::selection {
+    @apply bg-gold-light text-ink;
+  }
+  :focus-visible {
+    outline: 2px solid #4F7A69;
+    outline-offset: 2px;
+  }
+}
+
+@layer components {
+  .axis-divider {
+    position: relative;
+    height: 1px;
+    background: repeating-linear-gradient(
+      90deg,
+      #C7CDBF 0,
+      #C7CDBF 1px,
+      transparent 1px,
+      transparent 24px
+    );
+  }
+  .axis-divider::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -3px;
+    width: 1px;
+    height: 7px;
+    background: #C7CDBF;
+  }
+
+  .axis-label {
+    @apply font-mono text-[11px] uppercase tracking-[0.14em] text-inkmuted/70;
+  }
+
+  .card {
+    @apply bg-white/60 border border-rule rounded-sm;
+  }
+
+  .btn-primary {
+    @apply inline-flex items-center gap-2 bg-sage text-paper font-body font-medium
+           px-4 py-2 rounded-sm hover:bg-sage-dark transition-colors
+           disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center gap-2 bg-transparent text-ink font-body font-medium
+           px-4 py-2 rounded-sm border border-rule hover:border-ink transition-colors
+           disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+
+  .field-label {
+    @apply block font-mono text-[11px] uppercase tracking-[0.12em] text-inkmuted mb-1.5;
+  }
+
+  .delta-up {
+    @apply text-sage-dark font-mono;
+  }
+  .delta-down {
+    @apply text-rust font-mono;
+  }
+}
