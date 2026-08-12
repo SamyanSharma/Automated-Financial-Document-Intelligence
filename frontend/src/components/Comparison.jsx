@@ -72,6 +72,22 @@ export default function Comparison() {
     return doc ? `${doc.company_name} — ${doc.report_date}` : id;
   };
 
+  if (documents.length === 0 && !error) {
+    return (
+      <p className="axis-label leading-relaxed">
+        No processed documents yet. Upload at least two on the Upload page, then come back here to compare them.
+      </p>
+    );
+  }
+
+  if (documents.length === 1) {
+    return (
+      <p className="axis-label leading-relaxed">
+        Only one processed document so far ({docLabel(documents[0].document_id)}). Upload a second one to compare.
+      </p>
+    );
+  }
+
   return (
     <div>
       <div className="grid sm:grid-cols-2 gap-4 max-w-2xl">
@@ -135,7 +151,9 @@ export default function Comparison() {
 
           <div>
             <div className="axis-label mb-3">Metric table</div>
-            <div className="card overflow-x-auto">
+
+            {/* Desktop / tablet: full table */}
+            <div className="card overflow-x-auto hidden sm:block">
               <table className="w-full text-sm font-mono">
                 <thead>
                   <tr className="border-b border-rule text-left">
@@ -164,6 +182,35 @@ export default function Comparison() {
                     })}
                 </tbody>
               </table>
+            </div>
+
+            {/* Mobile: stacked cards, one per metric, avoids horizontal scrolling */}
+            <div className="sm:hidden space-y-3">
+              {Object.keys(METRIC_LABELS)
+                .filter((key) => key in metricsA && key in metricsB)
+                .map((key) => {
+                  const delta =
+                    metricsA[key] !== 0 ? (metricsB[key] - metricsA[key]) / Math.abs(metricsA[key]) : null;
+                  return (
+                    <div key={key} className="card px-4 py-3">
+                      <div className="flex items-center justify-between mb-2">
+                        <span className="font-body text-sm">{METRIC_LABELS[key]}</span>
+                        <span className={`font-mono text-sm ${delta >= 0 ? 'delta-up' : 'delta-down'}`}>
+                          {delta === null ? '—' : formatDelta(delta)}
+                        </span>
+                      </div>
+                      <div className="axis-divider mb-2" />
+                      <div className="flex items-center justify-between text-xs font-mono text-inkmuted">
+                        <span className="truncate max-w-[45%]">{docLabel(docAId)}</span>
+                        <span>{formatCurrency(metricsA[key])}</span>
+                      </div>
+                      <div className="flex items-center justify-between text-xs font-mono text-inkmuted mt-1">
+                        <span className="truncate max-w-[45%]">{docLabel(docBId)}</span>
+                        <span>{formatCurrency(metricsB[key])}</span>
+                      </div>
+                    </div>
+                  );
+                })}
             </div>
           </div>
 
