@@ -34,3 +34,4 @@ describe('RequireAuth', () => {
     expect(screen.queryByText('Protected upload page')).not.toBeInTheDocument();
   });
 });
+});
