@@ -45,9 +45,7 @@ describe('Comparison', () => {
 
     await waitFor(() => expect(documentsApi.getDocumentMetrics).toHaveBeenCalledTimes(2));
 
-    // Revenue moved 30% (>=15% threshold) -> should appear as an insight.
     expect(await screen.findByText(/revenue increased between the two periods/i)).toBeInTheDocument();
-    // Net income moved 5% (<15%) -> should NOT appear as an insight.
     expect(screen.queryByText(/net income increased between the two periods/i)).not.toBeInTheDocument();
   });
 
