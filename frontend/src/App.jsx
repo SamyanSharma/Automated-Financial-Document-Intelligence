@@ -113,8 +113,6 @@ function AppShell({ menuOpen, setMenuOpen, onLogout }) {
 
 export default function App() {
   const [menuOpen, setMenuOpen] = useState(false);
-  // Re-checked on every render, so a fresh login (which writes to
-  // localStorage then navigates) is picked up immediately.
   const isAuthed = Boolean(localStorage.getItem('auth_token'));
 
   const handleLogout = () => {
