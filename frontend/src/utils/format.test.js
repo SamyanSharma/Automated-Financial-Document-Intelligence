@@ -77,6 +77,6 @@ describe('truncateFilename', () => {
     const long = 'a-very-long-quarterly-earnings-report-file-name.pdf';
     const result = truncateFilename(long, 20);
     expect(result.endsWith('.pdf')).toBe(true);
-    expect(result.length).toBeLessThanOrEqual(20 + 1); // "..." adds a little slack
+    expect(result.length).toBeLessThanOrEqual(20 + 1);
   });
 });
