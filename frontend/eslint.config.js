@@ -31,8 +31,8 @@ export default [
     rules: {
       ...react.configs.recommended.rules,
       ...reactHooks.configs.recommended.rules,
-      'react/react-in-jsx-scope': 'off', // not needed with the automatic JSX runtime
-      'react/prop-types': 'off', // project doesn't use PropTypes
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off',
       'react-refresh/only-export-components': 'warn',
       'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
     },
