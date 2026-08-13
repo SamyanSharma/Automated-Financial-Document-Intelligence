@@ -2,11 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { login } from '../api/auth.js';
 
-/**
- * Minimal login screen. Posts credentials to POST /api/v1/auth/login,
- * expects { access_token } back, and stores it for api/client.js's
- * request interceptor to pick up on every subsequent call.
- */
 export default function LoginPage({ onLogin }) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
