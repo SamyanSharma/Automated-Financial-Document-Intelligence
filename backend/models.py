@@ -1,6 +1,7 @@
-from sqlalchemy import Column, Integer, String,DateTime
+from sqlalchemy import Column, Integer, String, DateTime,Float, Text,JSON
 from database import Base
 from datetime import datetime
+from sqlalchemy import ForeignKey
 
 class Company(Base):
 
@@ -50,6 +51,103 @@ class Filing(Base):
         String
     )
     uploaded_at = Column(
+        DateTime,
+        default=datetime.utcnow
+    )
+
+
+class DocumentChunk(Base):
+
+    __tablename__ = "document_chunks"
+
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
+
+    filing_id = Column(
+        Integer,
+        nullable=False
+    )
+
+    chunk_index = Column(
+        Integer,
+        nullable=False
+    )
+
+    text = Column(
+        Text,
+        nullable=False
+    )
+
+    page_number = Column(
+        Integer,
+        nullable=True
+    )
+    embedding = Column(JSON, nullable=True)
+
+class FinancialMetric(Base):
+
+    __tablename__ = "financial_metrics"
+
+
+    id = Column(
+        Integer,
+        primary_key=True,
+        index=True
+    )
+
+
+    document_id = Column(
+        Integer,
+        nullable=False
+    )
+
+
+    company_name = Column(
+        String,
+        nullable=True
+    )
+
+
+    financial_year = Column(
+        String,
+        nullable=True
+    )
+
+
+    revenue = Column(
+        Float,
+        nullable=True
+    )
+
+
+    total_assets = Column(
+        Float,
+        nullable=True
+    )
+
+
+    total_liabilities = Column(
+        Float,
+        nullable=True
+    )
+
+
+    debt = Column(
+        Float,
+        nullable=True
+    )
+
+
+    cash_flow = Column(
+        Float,
+        nullable=True
+    )
+
+
+    created_at = Column(
         DateTime,
         default=datetime.utcnow
     )
