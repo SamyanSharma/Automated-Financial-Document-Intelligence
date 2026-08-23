@@ -3,6 +3,7 @@ import shutil
 from database import SessionLocal
 from models import Filing
 from services.pdf_service import extract_text
+import fitz
 
 
 

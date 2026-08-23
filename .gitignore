@@ -36,3 +36,5 @@ backend/uploads/
 
 # Jupyter notebook checkpoints
 .ipynb_checkpoints/
+
+backend/test_pdf.py
