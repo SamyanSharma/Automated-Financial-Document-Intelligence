@@ -1,37 +1,41 @@
 from fastapi import FastAPI
 
-import models
-from database import engine
-
 from routers import documents
-from routers.analysis import router as analysis_router
-
-
-models.Base.metadata.create_all(
-    bind=engine
-)
+from routers import companies
+from routers import analysis
+from routers import rag
 
 
 app = FastAPI(
-    title="Financial Document Intelligence API"
-)
-
-
-app.include_router(
-    analysis_router
+    title="Automated Financial Document Intelligence",
+    description="AI-powered financial document analysis API",
+    version="1.0.0"
 )
 
 
 app.include_router(
     documents.router,
-    prefix="/documents"
+    prefix="/documents",
+    tags=["Documents"]
+)
+
+app.include_router(
+    companies.router,
+    prefix="/api/v1",
+    tags=["Companies"]
+)
+
+app.include_router(
+    analysis.router
+)
+
+app.include_router(
+    rag.router
 )
 
 
 @app.get("/")
-def home():
-
+def root():
     return {
-        "message":
-        "Financial AI Backend Running"
+        "message": "Automated Financial Document Intelligence API is running"
     }
